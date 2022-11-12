@@ -1,0 +1,325 @@
+@import 'variables/colors';
+@import 'variables/fonts';
+@import 'variables/keyframes';
+@import 'variables/media';
+
+* {
+    margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    
+}
+
+body {
+    overflow: overlay;
+    background-color: $dark-color2;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}  
+::-webkit-scrollbar-thumb {
+    background: #888;
+    opacity: 0.5; 
+}
+
+#notification-box {
+    position: fixed;
+    right: 0;
+    bottom: 20%;
+    .notification {
+        position: relative;
+        right: 0;
+        max-width: 200px;
+        margin-bottom: 15px;
+        padding: 11px;
+        color: $font-color1;
+        font-family: 'Outfit', sans-serif;
+        animation: right 0.5s;
+        animation-fill-mode: forwards;
+        &.error {
+            background-color: #433c70;
+        }
+        &.warning {
+            background-color: #d9864b;
+        }
+        &.succes {
+           background-color: #9ca45c; 
+        }
+        &.info {
+            background-color: #d4d4bc;
+            color: $font-color5;
+        }
+    }
+    svg {
+        cursor: pointer;
+        path {
+            pointer-events: none;
+        }
+    }
+}
+
+header {
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Outfit', sans-serif;
+    width: 100%;
+    z-index: 2;
+    height: 6.4vh;
+    min-height: 58px;
+    transition: 1.2s;
+    @include responsive(1) {
+        clip-path: circle(20% at right);
+    }
+    nav {
+        display: flex;
+        margin-right: 5%;
+        text-decoration: none;
+        color: $font-color1;
+    }
+    ul {
+        display: flex;
+        flex-direction: row;
+        &:first-child {
+            float: left;
+        }
+        li {
+            display: flex;
+            flex-direction: column;
+            list-style-type: none;
+            margin-left: 1.3rem;
+            justify-content: center;
+            cursor: pointer;
+            a {
+                font-size : clamp(0.9rem, 0.9vw, 1.2rem);
+                text-decoration: none;
+                color: $font-color1;
+            }
+            &::after {
+                content: '';
+                width: 0%;
+                height: 0.15rem;
+                background-color: $font-color1;
+                display: block;
+                border-radius: 0.2rem;
+                margin: 0.2rem auto 0 auto;
+                transition: all 0.3s ease;
+            }
+            &:hover::after {
+                width: 100%;
+            }
+            @include responsive(1) {
+                visibility: hidden;
+                opacity: 0;
+                font-size: 0;
+            }
+        }
+        #hamburger {
+            position: absolute;
+            display: none;
+            padding: 5px;
+            right: 3%;
+            top: 40%;
+            transition: 2s;
+            cursor: pointer;
+            div {
+                width: 20px;
+                height: 2px;
+                background-color: $font-color1;
+                margin: 4px;
+                transition: 0.3s ease;
+                &:first-child {
+                    margin-bottom: 4px;
+                    margin-top: 0;
+                }
+                &:last-child {
+                    margin-bottom: 0px;
+                    margin-top: 4px;
+                }
+            }
+            @include responsive(1) {
+                display: inline-block;
+            }
+            &.toggle {
+                padding: 7px;
+                top: 50%;
+                .line1 {
+                    transform: rotate(-45deg) translate(-2px,3px);
+                }
+                .line2 {
+                    transition: all 0.5s ease;
+                    width: 0;
+                }
+                .line3 {
+                    transform: rotate(45deg) translate(-6px,-6px);
+                }
+            }
+        }
+    }
+    &.open {
+        background: linear-gradient(150deg, #1e242c7e 0%, #424165 82%);
+        backdrop-filter: blur(12px) sepia(0.22);
+        clip-path: circle(45% at right);
+        height: 100vh;
+        justify-content: center;
+        transition: 2s;
+        nav {
+            align-items: center;
+            margin-left: 35%;
+            ul {
+                flex-direction: column;
+                li {
+                    visibility: visible;
+                    opacity: 1;
+                    transition: visibility 0s, opacity 2s linear;
+                    a, p {
+                        font-size : clamp(1.2rem, 3vw, 2rem);
+                    }
+                }
+            }
+        }
+    }
+    &.scroll {
+        @include responsive(-1) {
+            backdrop-filter: blur(6px);
+            &.open {
+                backdrop-filter: blur(12px) sepia(0.22);
+            }
+        }
+    }
+}
+
+.login-form {
+    align-items: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        label {
+            color: $font-color2;
+            margin-bottom: 3px;
+        }
+        input {
+            margin-bottom: 25px;
+            border: 1px solid rgba(242, 234, 195, 0.37);
+            outline: 0;
+            padding: 0.4em;
+            border-radius: 3px;
+            width: 100%;
+            background-color: rgba(63, 63, 63, 0.91);
+            color: $font-color1;
+            &[type=submit] {
+                width: 40%;
+                float: left;
+                cursor: pointer;
+                color: $font-color1;
+            }
+        }
+    }
+}
+
+.cms-form {
+    align-items: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        label {
+            color: $font-color2;
+            margin-bottom: 3px;
+        }
+        input, select, textarea, output {
+            margin-bottom: 25px;
+            border: 1px solid rgba(242, 234, 195, 0.37);
+            outline: 0;
+            padding: 0.4em;
+            border-radius: 3px;
+            width: 100%;
+            background-color: rgba(63, 63, 63, 0.91);
+            color: $font-color1;
+            &[type=submit] {
+                width: 40%;
+                float: left;
+                cursor: pointer;
+                color: $font-color1;
+            }
+        }
+    }
+}
+
+#cms-content {
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    gap: 100px;
+    fieldset {
+        border: 2px dashed rgba(242, 234, 195, 0.37);
+        min-height: 150px;
+        height: 100%;
+        width: clamp(150px, 12%, 15%);
+        padding: 40px;
+        color: $font-color2;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        legend {
+            padding: 20px;
+            font-size: clamp(0.9rem, 1.3vw, 8vw);
+        }
+        a {
+            text-decoration: none;
+            color: $font-color1;
+        }
+        &.view {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            .card {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                h4, span {
+                    width: 80px;
+                }
+                img {
+                    height: 8%;
+                    width: 8%;
+                }
+                a {
+                    width: 80px;
+                    text-align: center;
+                }
+                @include responsive(1) {
+                    h4, span, a {
+                        width: 50px;
+                    }
+                }
+            }
+        }
+        &.add {
+            width: 100%;
+            padding: 20px;
+        }
+        &.edit {
+            img {
+                height: 25vh;
+                width: 25vh;
+            }
+        }
+    }
+    @include responsive(1) {
+        gap: 20px;
+    }
+}

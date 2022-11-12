@@ -1,0 +1,60 @@
+@keyframes gradient {
+    0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(10px);
+	}
+	50% {
+		transform: translatey(-4px);
+	}
+	100% {
+		transform: translatey(10px);
+	}
+}
+
+@keyframes wheel {
+	to {
+	  opacity: 0;
+	  top: clamp(20px, 1.7vw, 50px);
+	}
+}
+
+@keyframes show {
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes show2 {
+    0% {
+        opacity: 0;
+    }
+    68% {
+        opacity: 0;
+    }
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes right {
+    0% {
+        right: -100%;
+    }
+    100% {
+        right: 0;
+    }
+}
