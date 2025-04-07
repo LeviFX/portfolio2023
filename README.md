@@ -1,5 +1,8 @@
+# Preview images
+--
+
 # personal-portfolio
-Live version can be found at: https://levi.cool/
+~~Live version can be found at: https://levi.cool/~~
 
 # Structure
 Styling, components, js and images can be found in the /includes folder
